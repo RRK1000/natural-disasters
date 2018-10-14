@@ -1,10 +1,10 @@
-import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View, Component} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {Input} from '../layout/signUpForm';
-import {Button} from '../layout/button'
-import {fireBaseApp} from '../../../../config/config';
+import {Button} from '../layout/button';
+import { firebaseApp } from '../../../../App';
 
-export class loggedOut extends Component {
+export class LoggedOut extends Component {
     state = {
         email:'',
         password:'',
@@ -48,7 +48,7 @@ export class loggedOut extends Component {
             var email = this.state.email;
             var password = this.state.password;
             if(email!='' && password!=''){
-                firebase.auth().createUserWithEmailAndPassword(email,password).then(function(user){
+                firebaseApp.auth().createUserWithEmailAndPassword(email,password).then(function(user){
                     console.log(user);
                     this.setState({authenticating:'true', email: user.email, name: user.name})
                 }).catch(function(err){
@@ -82,4 +82,3 @@ const styles = StyleSheet.create({
       margin: 10,
     }
 });
-  
